@@ -2,13 +2,10 @@
 
 using namespace std;
 
-namespace OrderBookCollector
+namespace Common
 {
-    namespace Common
-    {
-        class IDataFeed{
-            void Start(string server);
-            void Stop();
-        };
-    }
+    class IDataFeed{
+        virtual void Start(string server) = 0;
+        virtual void Stop() = 0;
+    };
 }

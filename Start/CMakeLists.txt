@@ -1,7 +1,7 @@
-include_directories(${CMAKE_SOURCE_DIR}/..)
+include_directories(${CMAKE_SOURCE_DIR})
 
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
 add_executable(Start main.cpp)
 
-target_link_libraries(Start debug BinanceDataFeed.lib)
+target_link_libraries(Start BinanceDataFeed)
