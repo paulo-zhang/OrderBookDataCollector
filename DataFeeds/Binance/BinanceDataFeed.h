@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Common/IDataFeed.h>
 
 using namespace Common;
@@ -6,13 +8,15 @@ namespace DataFeeds
 {
     namespace Binance
     {
-        class BinanceDataFeed : IDataFeed
+        class BinanceDataFeed : public IDataFeed
         {
         private:
             /* data */
         public:
-            void Start(string server);
-            void Stop();
+            BinanceDataFeed();
+            virtual ~BinanceDataFeed();
+            virtual void Start(string server);
+            virtual void Stop();
         };
     }
 }

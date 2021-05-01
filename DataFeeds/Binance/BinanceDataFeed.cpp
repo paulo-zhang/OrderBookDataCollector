@@ -7,12 +7,20 @@ namespace DataFeeds
 {
     namespace Binance
     {
+        BinanceDataFeed::BinanceDataFeed() {
+
+        }
+
+        BinanceDataFeed::~BinanceDataFeed() {
+
+        }
+        
         void BinanceDataFeed::Start(string server){
-            cout << "Start(" << server << ")" << endl;
+            cout << "BinanceDataFeed::Start(" << server << ")" << endl;
         }
 
         void BinanceDataFeed::Stop(){
-            cout << "Stop()"<<endl;
+            cout << "BinanceDataFeed::Stop()"<<endl;
         }
     }
 }

@@ -1,14 +1,15 @@
 #include <iostream>
-#include <DataFeeds/Binance/BinanceDataFeed.h>
+#include "Platform.h"
 
 using namespace std;
-using namespace DataFeeds::Binance;
+using namespace Start;
 
 int main()
 {
-    BinanceDataFeed feed;
-    feed.Start("server from main");
     cout <<"Hello main()." << endl;
-    feed.Stop();
+    Platform p;
+    p.Start();
+    
+    p.Stop();
    return 0;
 }
