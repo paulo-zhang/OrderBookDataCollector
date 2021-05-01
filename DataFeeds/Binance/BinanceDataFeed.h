@@ -1,5 +1,10 @@
 #pragma once
 
+#define ASIO_STANDALONE
+
+#include <websocketpp/config/asio_no_tls_client.hpp>
+#include <websocketpp/client.hpp>
+
 #include <Common/IDataFeed.h>
 
 using namespace Common;
