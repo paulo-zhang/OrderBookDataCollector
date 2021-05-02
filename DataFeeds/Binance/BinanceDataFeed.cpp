@@ -40,7 +40,7 @@ namespace DataFeeds
                                 boost::asio::ssl::context::no_sslv3 |
                                 boost::asio::ssl::context::single_dh_use);
             } catch (std::exception &e) {
-                std::cout << "Error in context pointer: " << e.what() << endl;
+                cout << "Error in context pointer: " << e.what() << endl;
             }
 
             return ctx;
@@ -65,7 +65,7 @@ namespace DataFeeds
                 initialized = true;
             }
             catch (websocketpp::exception const & e) {
-                std::cout << e.what() << std::endl;
+                cout << "BinanceDataFeed::TryInitClient() error: " << e.what() << std::endl;
             }
         }
 
@@ -90,8 +90,8 @@ namespace DataFeeds
                     // will exit when this connection is closed.
                     c.run();
                 } catch (websocketpp::exception const & e) {
-                    std::cout << e.what() << std::endl;
-                    std::this_thread::sleep_for (std::chrono::seconds(3));
+                    cout << "BinanceDataFeed::Reconnection() error: " << e.what() << std::endl;
+                    this_thread::sleep_for (std::chrono::seconds(3));
                 }
             }
         }

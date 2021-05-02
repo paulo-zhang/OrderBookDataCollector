@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+// https://github.com/nlohmann/json
 #include <nlohmann/json.hpp>
 
 using namespace std;
@@ -23,6 +24,35 @@ namespace Common
         ulong FinalId;
         vector<Quote> Asks;
         vector<Quote> Bids;
+
+        string Serialize(){
+            json j;
+            j["e"] = EventType;
+            j["E"] = EventTime;
+            j["s"] = Symbol;
+            j["U"] = FirstId;
+            j["u"] = FinalId;
+            
+            auto asks = json::array();
+            for(auto &q : Asks){
+                auto quote = json::array();
+                quote.push_back(q.Price);
+                quote.push_back(q.Quantity);
+                asks.push_back(quote);
+            }
+            j["a"] = asks;
+
+            auto bids = json::array();
+            for(auto &q : Bids){
+                auto quote = json::array();
+                quote.push_back(q.Price);
+                quote.push_back(q.Quantity);
+                bids.push_back(quote);
+            }
+            j["b"] = bids;
+
+            return j.dump();
+        }
 
         void Deserialize(const string &jsonStr){
             auto j = json::parse(jsonStr);

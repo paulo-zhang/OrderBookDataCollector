@@ -21,5 +21,9 @@ namespace Storages
         void MongoDBStorage::Stop(){
             cout << "MongoDBStorage::Stop()" << endl;;
         }
+
+        void MongoDBStorage::SaveOrderBook(OrderBook orderBook){
+            
+        }
     }
 }

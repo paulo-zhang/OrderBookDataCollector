@@ -12,6 +12,7 @@ namespace Storages
             virtual ~MongoDBStorage();
             virtual void Start(string server);
             virtual void Stop();
+            virtual void SaveOrderBook(OrderBook orderBook);
         };
     }
 }

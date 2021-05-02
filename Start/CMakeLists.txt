@@ -21,3 +21,19 @@ endif()
 find_package(OpenSSL REQUIRED) 
 
 target_link_libraries(Start BinanceDataFeed RedisStorage MongoDBStorage OpenSSL::SSL)
+
+# https://github.com/sewenew/redis-plus-plus#use-redis-plus-plus-in-your-project
+# <------------ add hiredis dependency --------------->
+find_path(HIREDIS_HEADER hiredis)
+target_include_directories(Start PUBLIC ${HIREDIS_HEADER})
+
+find_library(HIREDIS_LIB hiredis)
+target_link_libraries(Start ${HIREDIS_LIB})
+
+# <------------ add redis-plus-plus dependency -------------->
+# NOTE: this should be *sw* NOT *redis++*
+find_path(REDIS_PLUS_PLUS_HEADER sw)
+target_include_directories(Start PUBLIC ${REDIS_PLUS_PLUS_HEADER})
+
+find_library(REDIS_PLUS_PLUS_LIB redis++)
+target_link_libraries(Start ${REDIS_PLUS_PLUS_LIB})

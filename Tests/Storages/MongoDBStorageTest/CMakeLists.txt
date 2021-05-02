@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(MongoDBStorageTest)
 
-include_directories(${CMAKE_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/ThirdParties)
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
 # GoogleTest requires at least C++11
