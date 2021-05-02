@@ -8,6 +8,7 @@ add_subdirectory(DataFeeds/Binance)
 add_subdirectory(Storages/Redis)
 add_subdirectory(Storages/MongoDB)
 
+add_subdirectory(Tests/CommonTest)
 add_subdirectory(Tests/DataFeeds/BinanceTest)
 add_subdirectory(Tests/Storages/MongoDBStorageTest)
 add_subdirectory(Tests/Storages/RedisStorageTest)

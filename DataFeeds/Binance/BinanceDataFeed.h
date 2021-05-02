@@ -2,10 +2,18 @@
 
 #define ASIO_STANDALONE
 
+#include <string>
+#include <thread>
+
 #include <websocketpp/config/asio_no_tls_client.hpp>
 #include <websocketpp/client.hpp>
 
 #include <Common/IDataFeed.h>
+#include <Common/OrderBook.h>
+#include <Common/IDataFeedContext.h>
+
+typedef websocketpp::client<websocketpp::config::asio_client> client;
+typedef websocketpp::config::asio_client::message_type::ptr message_ptr;
 
 using namespace Common;
 
@@ -13,12 +21,29 @@ namespace DataFeeds
 {
     namespace Binance
     {
+        class BinanceDataFeed;
+
+        class WebSocketClient : public client{
+            public:
+                BinanceDataFeed * feed;
+        };
+
         class BinanceDataFeed : public IDataFeed
         {
         private:
-            /* data */
+            // Create a client endpoint
+            WebSocketClient *pClient = NULL;
+            thread *pReconnectThread = NULL;
+            string server;
+            bool stopped = false;
+            IDataFeedContext *context;
+
+            void OnMessage(WebSocketClient* c, websocketpp::connection_hdl hdl, message_ptr msg);
+            void Reconnection();
+            friend void Reconnect(BinanceDataFeed *that);
+            friend void on_message(client* c, websocketpp::connection_hdl hdl, message_ptr msg);
         public:
-            BinanceDataFeed();
+            BinanceDataFeed(IDataFeedContext *context);
             virtual ~BinanceDataFeed();
             virtual void Start(string server);
             virtual void Stop();

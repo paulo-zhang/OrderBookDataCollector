@@ -13,5 +13,6 @@ set_target_properties(BinanceDataFeed
   )
 
 # R_X86_64_PC32 against symbol `_ZSt4cout@@GLIBCXX_3.4' can not be used when making a shared object
-set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall --std=c++17 -O3 -fPIC" )
+# -pthread, https://stackoverflow.com/questions/34933042/undefined-reference-to-pthread-create-error-when-making-c11-application-with
+set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall --std=c++17 -O3 -fPIC -pthread" ) 
 set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -O3 -fPIC" )

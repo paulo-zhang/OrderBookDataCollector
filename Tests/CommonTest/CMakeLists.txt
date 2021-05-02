@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(BinanceTest)
+project(OrderBookTest)
 
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/ThirdParties ${CMAKE_SOURCE_DIR}/ThirdParties/asio-1.18.1)
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/ThirdParties)
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
 # GoogleTest requires at least C++11
@@ -18,15 +18,14 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-file(GLOB cpps *.cpp)
-add_executable(BinanceTest ${cpps})
-
+add_executable(
+    OrderBookTest
+    OrderBookTest.cpp
+)
 target_link_libraries(
-    BinanceTest
+    OrderBookTest
   gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(BinanceTest)
-
-target_link_libraries(BinanceTest BinanceDataFeed)
+gtest_discover_tests(OrderBookTest)
