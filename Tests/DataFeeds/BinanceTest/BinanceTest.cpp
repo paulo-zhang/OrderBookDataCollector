@@ -8,13 +8,13 @@ using namespace DataFeeds::Binance;
 
 // Demonstrate some basic assertions.
 TEST(BinanceDataFeed_Connection_Test, BasicAssertions) {
-  DataFeedContextMock contextMock([](auto &orderBook){
-      cout << orderBook.Symbol;
+  DataFeedContextMock contextMock([](auto &orderBook, int count){
+      cout << "Receive orderBook(" << count << "): Symbol: " << orderBook.Symbol << ", EventType: " << orderBook.EventType << ", EventTime: " << orderBook.EventTime << endl;
   });
 
   IDataFeed *p = new BinanceDataFeed(&contextMock);
   p->Start("wss://stream.binance.com:9443/ws/bnbbtc@depth");
-  std::this_thread::sleep_for (std::chrono::seconds(30));
+  std::this_thread::sleep_for (std::chrono::seconds(10));
   p->Stop();
   EXPECT_TRUE(p != NULL);
 }
