@@ -1,6 +1,10 @@
 # OrderBookDataCollector
+## Requirement
+* Connect to Binance Websocket api(document: https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly)
+* Receive order book data;
+* Save data to Redis & MongoDB.
 
-## Compile Project:
+## Compile Project
 
 Install OpenSSL: $sudo apt-get install libssl-dev
 
