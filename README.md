@@ -33,6 +33,8 @@ Install redis-cli(Optional): https://codewithhugo.com/install-just-redis-cli-on-
 $sudo docker run -d -p 27170-27172:27017-27019 --name mongodb mongo:latest
 
 Install MongoDB driver: 
+
 Installing the current release of the MongoDB C Driver (libmongoc) and BSON library (libbson): http://mongoc.org/libmongoc/1.17.5/installing.html
+
 Install mongocxx-driver: http://mongocxx.org/mongocxx-v3/installation/linux/#step-3-download-the-latest-version-of-the-mongocxx-driver
 
