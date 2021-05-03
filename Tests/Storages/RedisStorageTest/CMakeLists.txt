@@ -19,31 +19,31 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(
-  RedisStorageTest
+  ${PROJECT_NAME}
   RedisStorageTest.cpp
 )
 target_link_libraries(
-  RedisStorageTest
+  ${PROJECT_NAME}
   gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(RedisStorageTest)
+gtest_discover_tests(${PROJECT_NAME})
 
-target_link_libraries(RedisStorageTest RedisStorage)
+target_link_libraries(${PROJECT_NAME} RedisStorage)
 
 # https://github.com/sewenew/redis-plus-plus#use-redis-plus-plus-in-your-project
 # <------------ add hiredis dependency --------------->
 find_path(HIREDIS_HEADER hiredis)
-target_include_directories(RedisStorageTest PUBLIC ${HIREDIS_HEADER})
+target_include_directories(${PROJECT_NAME} PUBLIC ${HIREDIS_HEADER})
 
 find_library(HIREDIS_LIB hiredis)
-target_link_libraries(RedisStorageTest ${HIREDIS_LIB})
+target_link_libraries(${PROJECT_NAME} ${HIREDIS_LIB})
 
 # <------------ add redis-plus-plus dependency -------------->
 # NOTE: this should be *sw* NOT *redis++*
 find_path(REDIS_PLUS_PLUS_HEADER sw)
-target_include_directories(RedisStorageTest PUBLIC ${REDIS_PLUS_PLUS_HEADER})
+target_include_directories(${PROJECT_NAME} PUBLIC ${REDIS_PLUS_PLUS_HEADER})
 
 find_library(REDIS_PLUS_PLUS_LIB redis++)
-target_link_libraries(RedisStorageTest ${REDIS_PLUS_PLUS_LIB})
+target_link_libraries(${PROJECT_NAME} ${REDIS_PLUS_PLUS_LIB})

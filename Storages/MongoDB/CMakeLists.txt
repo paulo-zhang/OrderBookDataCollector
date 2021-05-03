@@ -1,4 +1,4 @@
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/ThirdParties)
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/ThirdParties /usr/local/include/bsoncxx/v_noabi /usr/local/include/mongocxx/v_noabi)
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
 file(GLOB headers *.h)

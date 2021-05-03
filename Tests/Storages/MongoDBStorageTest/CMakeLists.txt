@@ -19,15 +19,25 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(
-  MongoDBStorageTest
+  ${PROJECT_NAME}
   MongoDBStorageTest.cpp
 )
 target_link_libraries(
-  MongoDBStorageTest
+  ${PROJECT_NAME}
   gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(MongoDBStorageTest)
+gtest_discover_tests(${PROJECT_NAME})
 
-target_link_libraries(MongoDBStorageTest MongoDBStorage)
+target_link_libraries(${PROJECT_NAME} MongoDBStorage)
+
+# MongoDB
+find_package(mongocxx REQUIRED)
+find_package(bsoncxx REQUIRED)
+
+include_directories(${LIBMONGOCXX_INCLUDE_DIR})
+include_directories(${LIBBSONCXX_INCLUDE_DIR})
+
+target_link_libraries(${PROJECT_NAME} mongo::bsoncxx_shared)
+target_link_libraries(${PROJECT_NAME} mongo::mongocxx_shared)

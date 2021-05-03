@@ -6,8 +6,13 @@ using namespace std;
 namespace Storages
 {
     namespace MongoDB{
-        MongoDBStorage::MongoDBStorage(){
+        bool MongoDBStorage::initialized = false;
 
+        MongoDBStorage::MongoDBStorage(){
+            if(!initialized){
+                mongocxx::instance instance{}; // This should be done only once.
+                initialized = true;
+            }
         }
 
         MongoDBStorage::~MongoDBStorage(){
