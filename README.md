@@ -1,6 +1,6 @@
 # OrderBookDataCollector
 
-# Compile Project:
+## Compile Project:
 
 Install OpenSSL: $sudo apt-get install libssl-dev
 
@@ -16,3 +16,13 @@ Clone websocketpp, put websocketpp/websocketpp into ThirdParties:
 https://github.com/zaphoyd/websocketpp 
 
 VS Code Command Pallete: CMake:Build.
+
+## Install storage support
+### Install Docker
+https://docs.docker.com/engine/install/ubuntu/
+
+### Install Redis
+$sudo docker run -d -p 63790:6379 --name enjoy-redis redis:latest
+
+### Install MongoDB
+$sudo docker run -d -p 27170-27172:27017-27019 --name mongodb mongo:latest
