@@ -1,5 +1,5 @@
 # https://github.com/zaphoyd/websocketpp
-# https://sourceforge.net/projects/asio/files/asio/1.18.1%20%28Stable%29/
+# https://sourceforge.net/projects/asio/files/asio/1.18.1%20%28Stable%29/ (https://udomain.dl.sourceforge.net/project/asio/asio/1.18.1%20%28Stable%29/asio-1.18.1.tar.gz)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/ThirdParties ${CMAKE_SOURCE_DIR}/ThirdParties/asio-1.18.1 /usr/include)
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})

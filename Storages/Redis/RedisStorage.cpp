@@ -41,6 +41,7 @@ namespace Storages
         void RedisStorage::Stop(){
             cout << "RedisStorage::Stop()\n";
             stopped = true;
+            cvNotifyCache.notify_all();
 
             if(pSaveDataThread != NULL){
                 if(pSaveDataThread->joinable()){
@@ -70,6 +71,7 @@ namespace Storages
                 if(newMap.size() == 0){
                     unique_lock<std::mutex> lck(mtxChache);
                     cvNotifyCache.wait(lck);
+                    continue;
                 }
 
                 unordered_map<string, string> hash;
@@ -77,7 +79,8 @@ namespace Storages
                     hash[b.first] = b.second.Serialize();
                 }
 
-                pRedis->hgetall("OrderBooks", std::inserter(hash, hash.end()));
+                pRedis->hmset("OrderBooks", hash.begin(), hash.end());
+                cout << "SaveDataToRedis, count: " << hash.size() << "\n";
             }
         }
     }
