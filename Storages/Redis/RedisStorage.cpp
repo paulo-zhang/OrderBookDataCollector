@@ -61,26 +61,32 @@ namespace Storages
 
         void RedisStorage::SaveDataToRedis(){
             while(!stopped){
-                unordered_map<string, OrderBook> newMap;
+                try{
+                    unordered_map<string, OrderBook> newMap;
+                    {
+                        lock_guard<mutex> lk(mtxChache);
+                        newMap.swap(cache);
+                        cache.clear();
+                    }
+
+                    if(newMap.size() == 0){
+                        unique_lock<std::mutex> lck(mtxChache);
+                        cvNotifyCache.wait(lck);
+                        continue;
+                    }
+
+                    unordered_map<string, string> hash;
+                    for(auto &b : newMap){
+                        hash[b.first] = b.second.Serialize();
+                    }
+
+                    pRedis->hmset("OrderBooks", hash.begin(), hash.end());
+                    cout << "SaveDataToRedis, count: " << hash.size() << "\n";
+                }
+                catch(const std::exception& e)
                 {
-                    lock_guard<mutex> lk(mtxChache);
-                    newMap.swap(cache);
-                    cache.clear();
+                    std::cerr << "RedisStorage::SaveDataToRedis(), error: " << e.what() << '\n';
                 }
-
-                if(newMap.size() == 0){
-                    unique_lock<std::mutex> lck(mtxChache);
-                    cvNotifyCache.wait(lck);
-                    continue;
-                }
-
-                unordered_map<string, string> hash;
-                for(auto &b : newMap){
-                    hash[b.first] = b.second.Serialize();
-                }
-
-                pRedis->hmset("OrderBooks", hash.begin(), hash.end());
-                cout << "SaveDataToRedis, count: " << hash.size() << "\n";
             }
         }
     }

@@ -1,6 +1,9 @@
 #pragma once
 
-#include <Common/IStorage.h>
+#include <map>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 #include <cstdint>
 #include <iostream>
@@ -13,6 +16,8 @@
 #include <bsoncxx/builder/stream/helpers.hpp>
 #include <bsoncxx/builder/stream/document.hpp>
 #include <bsoncxx/builder/stream/array.hpp>
+
+#include <Common/IStorage.h>
 
 using bsoncxx::builder::stream::close_array;
 using bsoncxx::builder::stream::close_document;
@@ -27,8 +32,17 @@ namespace Storages
     namespace MongoDB{
         class MongoDBStorage : public IStorage{
             private:
-            static bool initialized;
-            bool stopped = false;
+                static bool initialized;
+                string server;
+                mongocxx::client *pClient = NULL;
+                vector<OrderBook> cache;
+                mutex mtxChache;
+                condition_variable cvNotifyCache;
+                bool stopped = false;
+                thread *pSaveDataThread = NULL;
+                void TryConnectMongoDB();
+                void SaveDataToMongoDB();
+                friend void ThreadSaveDataToMongoDB(MongoDBStorage *that);
             public:
                 MongoDBStorage();
                 virtual ~MongoDBStorage();
