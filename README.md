@@ -79,11 +79,18 @@ Single Responsibility:
 This is express everywhere in the code. Make sure every class does only highly related things, and one method does one thing only. If a method is over 50 lines, it may be too chubby, try make it slimmer by using more methods. If a class is bigger than 500 lines, we may need to review to class and consider deviding it into smaller ones. Make sure it is high cohesion within one class, and low coupling between any two classes(see Inversion of Control).
 
 Open-Close Principle
+This is not obvious in this project, but keep this in mind when you try to change the behaviour of a class.
+
+Liskov Substitution Principle
+
+Interface Segregation Principle
+
+Dependency Inversion Principle (Inversion of Control (IoC))
 
 
 ### Dependency Injection (DI)
 
-### Inversion of Control (IoC)
+
 
 ## Testability Explanation
 
