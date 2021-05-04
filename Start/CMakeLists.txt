@@ -49,3 +49,7 @@ include_directories(${LIBBSONCXX_INCLUDE_DIR})
 
 target_link_libraries(${PROJECT_NAME} mongo::bsoncxx_shared)
 target_link_libraries(${PROJECT_NAME} mongo::mongocxx_shared)
+
+# Copy configuration.json
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/configuration.json
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

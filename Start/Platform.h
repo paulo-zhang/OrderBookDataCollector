@@ -11,6 +11,7 @@ namespace Start{
         IDataFeed *feed;
         IStorage *redis;
         IStorage *mongoDB;
+        
         public:
         Platform();
         void Start();

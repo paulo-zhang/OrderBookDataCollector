@@ -1,0 +1,5 @@
+{
+    "BinanceServer": "wss://stream.binance.com:9443/ws/bnbbtc@depth",
+    "RedisServer": "tcp://127.0.0.1:63790,password=",
+    "MongoDBServer": "mongodb://localhost:27170"
+}

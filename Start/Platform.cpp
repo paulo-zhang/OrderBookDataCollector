@@ -1,9 +1,11 @@
 #include <iostream>
+#include <fstream>
 #include <DataFeeds/Binance/BinanceDataFeed.h>
 #include <Storages/MongoDB/MongoDBStorage.h>
 #include <Storages/Redis/RedisStorage.h>
 #include "DataFeeds/DataFeedContext.h"
 #include "Platform.h"
+#include "Configuration.h"
 
 using namespace DataFeeds::Binance;
 using namespace Storages::MongoDB;
@@ -17,17 +19,25 @@ namespace Start{
     }
 
     void Platform::Start(){
-        feed = new BinanceDataFeed(new DataFeedContext());
+        cout <<"Platform::Start()" << endl;
+
         redis = new RedisStorage();
         mongoDB = new MongoDBStorage();
 
-        cout <<"Platform::Start()" << endl;
+        feed = new BinanceDataFeed(new DataFeedContext([this](OrderBook& orderBook){
+            redis->SaveOrderBook(orderBook);
+            mongoDB->SaveOrderBook(orderBook);
+        }));
         
-        feed->Start("Server from Platform.");
+        Configuration config;
+        ifstream fin("configuration.json");
+        stringstream strStream;
+        strStream << fin.rdbuf();//read the file
+        config.Deserialize(strStream.str());
 
-        redis->Start("Server from Platform.");
-
-        mongoDB->Start("Server from Platform.");
+        feed->Start(config.BinanceServer);
+        redis->Start(config.RedisServer);
+        mongoDB->Start(config.MongoDBServer);
     }
 
     void Platform::Stop(){
