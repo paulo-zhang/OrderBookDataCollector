@@ -82,30 +82,35 @@ namespace Storages
                     }
 
                     std::vector<bsoncxx::document::value> documents;
+                    using bsoncxx::builder::basic::kvp;
+                    using bsoncxx::builder::basic::sub_array;
+
                     for(auto &b : newContainer){
-                        auto builder = bsoncxx::builder::stream::document{};
-                        builder << "e" << b.EventType
-                        << "E" << b.EventTime 
-                        << "s" << b.Symbol
-                        << "U" << b.FirstId
-                        << "u" << b.FinalId
-                        << "b" << bsoncxx::builder::stream::open_array;
-                        for(auto &q : b.Bids){
-                            builder << bsoncxx::builder::stream::open_array
-                            << q.Price << q.Quantity
-                            << close_array;
-                        }
-                        builder << close_array
-                        << "a" << bsoncxx::builder::stream::open_array;
-                        for(auto &q : b.Asks){
-                            builder << bsoncxx::builder::stream::open_array
-                            << q.Price << q.Quantity
-                            << close_array;
-                        }
-                        builder << close_array
-                        << bsoncxx::builder::stream::close_document << bsoncxx::builder::stream::finalize;
-                        
-                        documents.push_back(builder);
+                        auto doc = bsoncxx::builder::basic::document{};
+                        doc.append(kvp("e", b.EventType));
+                        doc.append(kvp("E", bsoncxx::types::b_int64() = {b.EventTime}));
+                        doc.append(kvp("s", b.Symbol));
+                        doc.append(kvp("U", bsoncxx::types::b_int64() = {b.FirstId}));
+                        doc.append(kvp("U", bsoncxx::types::b_int64() = {b.FinalId}));
+                        doc.append(kvp("a", [&b](sub_array child) {
+                            for (const auto& q : b.Asks) {
+                                child.append([&q](sub_array nestChild){
+                                    nestChild.append(q.Price);
+                                    nestChild.append(q.Quantity);
+                                });
+                            }
+                        }));
+
+                        doc.append(kvp("b", [&b](sub_array child) {
+                            for (const auto& q : b.Bids) {
+                                child.append([&q](sub_array nestChild){
+                                    nestChild.append(q.Price);
+                                    nestChild.append(q.Quantity);
+                                });
+                            }
+                        }));
+
+                        documents.push_back(doc.extract());
                     }
 
                     mongocxx::database db = (*pClient)["TradeDB"];

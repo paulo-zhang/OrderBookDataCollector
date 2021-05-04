@@ -18,10 +18,10 @@ namespace Common
 
     struct OrderBook {
         string EventType;
-        ulong EventTime;
+        long int EventTime;
         string Symbol;
-        ulong FirstId;
-        ulong FinalId;
+        long int FirstId;
+        long int FinalId;
         vector<Quote> Asks;
         vector<Quote> Bids;
 

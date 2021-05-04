@@ -16,6 +16,7 @@
 #include <bsoncxx/builder/stream/helpers.hpp>
 #include <bsoncxx/builder/stream/document.hpp>
 #include <bsoncxx/builder/stream/array.hpp>
+#include <bsoncxx/types.hpp>
 
 #include <Common/IStorage.h>
 
