@@ -2,7 +2,7 @@
 ## Requirement
 * Connect to Binance Websocket api(document: https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly)
 * Receive order book data;
-* Save data to Redis & MongoDB.
+* Save data to Redis & MongoDB asynchronously.
 
 ## Install storage support
 ### Install Docker
@@ -28,6 +28,7 @@ Install boost:
 Clone nlohmann json, put nlohmann/single_include/nlohmann into ThirdParties:
 
 `$git clone https://github.com/nlohmann/json`
+
 `$cp -a nlohmann/single_include/nlohmann ~/Code/OrderBookDataCollector/ThirdParties`
 
 Download asio-1.18.1, put asio-1.18.1/include into ThirdParties and change name to asio-1.18.1:
@@ -37,6 +38,7 @@ https://udomain.dl.sourceforge.net/project/asio/asio/1.18.1%20%28Stable%29/asio-
 Clone websocketpp, put websocketpp/websocketpp into ThirdParties:
 
 `$git clone https://github.com/zaphoyd/websocketpp `
+
 `$cp -a websocketpp/websocketpp ~/Code/OrderBookDataCollector/ThirdParties`
 
 Install MongoDB driver: 
@@ -50,7 +52,9 @@ Install mongocxx-driver:
 http://mongocxx.org/mongocxx-v3/installation/linux/#step-3-download-the-latest-version-of-the-mongocxx-driver
 
 VS Code Command Pallete: 
+
 `$CMake: Build`
+
 `$CMake: Debug`
 
 ## OOD/OOP Explanation
