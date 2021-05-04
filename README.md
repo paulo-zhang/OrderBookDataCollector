@@ -1,7 +1,7 @@
 # OrderBookDataCollector, Object Oriented Design With C++ 17
 ## Requirement
 * Connect to Binance Websocket api(document: https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly)
-* Receive order book data;
+* Receive order book data with realtime connection (Websocket);
 * Save data to Redis & MongoDB asynchronously.
 
 ## Install Storage Support
