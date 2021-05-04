@@ -1,5 +1,5 @@
 # OrderBookDataCollector
-#Object Oriented Design With C++ 17
+# Object Oriented Design With C++ 17
 
 ## Requirement
 * Connect to Binance Websocket api(document: https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly)
