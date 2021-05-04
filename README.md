@@ -58,6 +58,10 @@ Clone websocketpp, put websocketpp/websocketpp into ThirdParties:
 
 Install Redis plus plus support:
 
+`$sudo apt install cmake`
+
+`$sudo apt-get install -y build-essential`
+
 https://github.com/sewenew/redis-plus-plus#installation
 
 
