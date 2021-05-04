@@ -4,7 +4,7 @@
 * Receive order book data;
 * Save data to Redis & MongoDB asynchronously.
 
-## Install storage support
+## Install Storage Support
 ### Install Docker
 https://docs.docker.com/engine/install/ubuntu/
 
