@@ -85,6 +85,8 @@ namespace Storages
                     using bsoncxx::builder::basic::kvp;
                     using bsoncxx::builder::basic::sub_array;
 
+                    // https://github.com/mongodb/mongo-cxx-driver/blob/master/examples/bsoncxx/builder_basic.cpp
+                    // http://mongocxx.org/mongocxx-v3/working-with-bson/
                     for(auto &b : newContainer){
                         auto doc = bsoncxx::builder::basic::document{};
                         doc.append(kvp("e", b.EventType));
