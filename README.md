@@ -41,8 +41,13 @@ Clone nlohmann json, put nlohmann/single_include/nlohmann into ThirdParties:
 
 Download asio-1.18.1, put asio-1.18.1/include into ThirdParties and change name to asio-1.18.1:
 
-https://udomain.dl.sourceforge.net/project/asio/asio/1.18.1%20%28Stable%29/asio-1.18.1.tar.gz
+`$wget https://udomain.dl.sourceforge.net/project/asio/asio/1.18.1%20%28Stable%29/asio-1.18.1.tar.gz`
 
+`tar -xf asio-1.18.1.tar.gz`
+
+`cp -a asio-1.18.1/include ~/Code/OrderBookDataCollector/ThirdParties`
+
+`sudo mv ~/Code/OrderBookDataCollector/ThirdParties/include ~/Code/OrderBookDataCollector/ThirdParties/asio-1.18.1`
 
 Clone websocketpp, put websocketpp/websocketpp into ThirdParties:
 
