@@ -76,6 +76,8 @@ VS Code Command Pallete:
 
 ### Dependency Injection (DI)
 
+### Inversion of Control (IoC)
+
 ## Testability Explanation
 
 ### TDD
