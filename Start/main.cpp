@@ -10,11 +10,8 @@ int main()
     Platform p;
     p.Start();
 
-    cout << "Press any key to continue.";
-    char c;
-    do{
-        cin >> c;
-    }while(c != '\e');
+    cout << "Press Esc Enter to exit.\n";
+    while(cin.get() != '\e');
 
     p.Stop();
    return 0;
