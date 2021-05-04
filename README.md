@@ -12,6 +12,8 @@ https://docs.docker.com/engine/install/ubuntu/
 
 ### Install Redis
 `$sudo docker run -d -p 63790:6379 --name enjoy-redis redis:latest`
+
+
 Install redis-cli(Optional): 
 
 https://codewithhugo.com/install-just-redis-cli-on-ubuntu-debian-jessie/
