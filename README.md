@@ -75,6 +75,11 @@ VS Code Command Pallete:
 ## OOD/OOP Explanation
 
 ### SOLID Principle
+Single Responsibility: 
+This is express everywhere in the code. Make sure every class does only highly related things, and one method does one thing only. If a method is over 50 lines, it may be too chubby, try make it slimmer by using more methods. If a class is bigger than 500 lines, we may need to review to class and consider deviding it into smaller ones. Make sure it is high cohesion within one class, and low coupling between any two classes(see Inversion of Control).
+
+Open-Close Principle
+
 
 ### Dependency Injection (DI)
 
