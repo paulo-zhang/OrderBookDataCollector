@@ -36,7 +36,7 @@ Clone nlohmann json, put nlohmann/single_include/nlohmann into ThirdParties:
 
 `$git clone https://github.com/nlohmann/json`
 
-`$cp -a nlohmann/single_include/nlohmann ~/Code/OrderBookDataCollector/ThirdParties`
+`$cp -a json/single_include/nlohmann ~/Code/OrderBookDataCollector/ThirdParties`
 
 
 Download asio-1.18.1, put asio-1.18.1/include into ThirdParties and change name to asio-1.18.1:
