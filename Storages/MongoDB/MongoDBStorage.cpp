@@ -72,7 +72,6 @@ namespace Storages
                     {
                         lock_guard<mutex> lk(mtxChache);
                         newContainer.swap(cache);
-                        cache.clear();
                     }
 
                     if(newContainer.size() == 0){

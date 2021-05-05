@@ -66,7 +66,6 @@ namespace Storages
                     {
                         lock_guard<mutex> lk(mtxChache);
                         newMap.swap(cache);
-                        cache.clear();
                     }
 
                     if(newMap.size() == 0){
