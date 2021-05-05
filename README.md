@@ -12,6 +12,8 @@ https://docs.docker.com/engine/install/ubuntu/
 
 ### Install Redis
 `$sudo docker run -d -p 63790:6379 --name enjoy-redis redis:latest`
+
+
 Install redis-cli(Optional): 
 
 https://codewithhugo.com/install-just-redis-cli-on-ubuntu-debian-jessie/
@@ -34,13 +36,18 @@ Clone nlohmann json, put nlohmann/single_include/nlohmann into ThirdParties:
 
 `$git clone https://github.com/nlohmann/json`
 
-`$cp -a nlohmann/single_include/nlohmann ~/Code/OrderBookDataCollector/ThirdParties`
+`$cp -a json/single_include/nlohmann ~/Code/OrderBookDataCollector/ThirdParties`
 
 
 Download asio-1.18.1, put asio-1.18.1/include into ThirdParties and change name to asio-1.18.1:
 
-https://udomain.dl.sourceforge.net/project/asio/asio/1.18.1%20%28Stable%29/asio-1.18.1.tar.gz
+`$wget https://udomain.dl.sourceforge.net/project/asio/asio/1.18.1%20%28Stable%29/asio-1.18.1.tar.gz`
 
+`tar -xf asio-1.18.1.tar.gz`
+
+`cp -a asio-1.18.1/include ~/Code/OrderBookDataCollector/ThirdParties`
+
+`sudo mv ~/Code/OrderBookDataCollector/ThirdParties/include ~/Code/OrderBookDataCollector/ThirdParties/asio-1.18.1`
 
 Clone websocketpp, put websocketpp/websocketpp into ThirdParties:
 
@@ -50,6 +57,10 @@ Clone websocketpp, put websocketpp/websocketpp into ThirdParties:
 
 
 Install Redis plus plus support:
+
+`$sudo apt install cmake`
+
+`$sudo apt-get install -y build-essential`
 
 https://github.com/sewenew/redis-plus-plus#installation
 
