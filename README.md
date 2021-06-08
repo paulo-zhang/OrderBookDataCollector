@@ -75,6 +75,11 @@ Install mongocxx-driver:
 
 http://mongocxx.org/mongocxx-v3/installation/linux/#step-3-download-the-latest-version-of-the-mongocxx-driver
 
+Include CPPServiceLocator:
+
+`$git clone https://github.com/stevef51/CPPServiceLocator.git`
+
+`$mv CPPServiceLocator ~/Code/OrderBookDataCollector/ThirdParties/`
 
 VS Code Command Pallete: 
 
