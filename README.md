@@ -43,6 +43,9 @@ Inject IDataFeedContext object to DataFeed implementation to allow call back not
 
 (To be implemented) Test Platform with Mock dependencies.
 
+## Class diagram
+![Class diagram](images/Class design.png)
+
 ## Testability Explanation
 
 Testability is achieved by reducing the coupling among modules. 
@@ -63,6 +66,9 @@ A great unit test framework to test C++ projects.
 
 https://github.com/google/googletest
 
+## Finally, run the project
+
+![Execution result](images/Execute results.png)
 
 ## Install Storage Support
 
