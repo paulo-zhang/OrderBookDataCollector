@@ -14,7 +14,7 @@ TEST(BinanceDataFeed_Connection_Test, BasicAssertions) {
 
   IDataFeed *p = new BinanceDataFeed(&contextMock);
   // https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly
-  p->Start("wss://stream.binance.com:9443/ws/bnbbtc@depth");
+  p->Start("wss://stream.binance.com:9443/ws/btcusdt@depth");
   std::this_thread::sleep_for (std::chrono::seconds(10));
   p->Stop();
   EXPECT_TRUE(p != NULL);

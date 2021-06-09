@@ -46,10 +46,10 @@ namespace Storages
                 friend void ThreadSaveDataToMongoDB(MongoDBStorage *that);
             public:
                 MongoDBStorage();
-                virtual ~MongoDBStorage();
-                virtual void Start(string server);
-                virtual void Stop();
-                virtual void SaveOrderBook(OrderBook orderBook);
+                ~MongoDBStorage() override;
+                void Start(string server) override;
+                void Stop() override;
+                void SaveOrderBook(OrderBook orderBook) override;
         };
     }
 }

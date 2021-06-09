@@ -29,10 +29,10 @@ namespace Storages
                 friend void ThreadSaveDataToRedis(RedisStorage *that);
             public:
                 RedisStorage();
-                virtual ~RedisStorage();
-                virtual void Start(string server);
-                virtual void Stop();
-                virtual void SaveOrderBook(OrderBook orderBook);
+                ~RedisStorage() override;
+                void Start(string server) override;
+                void Stop() override;
+                void SaveOrderBook(OrderBook orderBook) override;
         };
     }
 }

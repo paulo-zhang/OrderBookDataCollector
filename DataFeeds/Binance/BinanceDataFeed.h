@@ -48,9 +48,9 @@ namespace DataFeeds
             void TryInitClient();
         public:
             BinanceDataFeed(IDataFeedContext *context);
-            virtual ~BinanceDataFeed();
-            virtual void Start(string server);
-            virtual void Stop();
+            ~BinanceDataFeed() override;
+            void Start(string server) override;
+            void Stop() override;
         };
     }
 }
