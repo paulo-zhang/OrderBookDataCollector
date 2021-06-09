@@ -37,13 +37,16 @@ As we can see both MongoDB and Redis modules implement the same interface, the c
 
 Inject IDataFeedContext object to DataFeed implementation to allow call back notifications.
 
-(To be implemented) Inject IStorage objects & IDataFeed objects using service locator.
+Inject IStorage objects & IDataFeed objects using service locator.
 
-(To be implemented) Make Platform a library, inject dependencies into Platform.
+Inject serviceLocators into PlatformService, so it only depends on interfaces instead of concrete implementations.
 
-(To be implemented) Test Platform with Mock dependencies.
+(To be implemented) Test PlatformService with Mock dependencies.
 
 ## Class diagram
+
+As we can see the main library PlatformService, which start all functions, has no dependent to any concrete storages or datafeeds. It only depends on interfaces (pure virtual classes) IStorage and IDataFeed, actually it doesn't even know the existence of RedisStorage, MongoDBStorage and BinanceDataFeed, which makes it totally testable. We can create a mock storage and a mock datafeed to test Platform.
+
 ![Class diagram](images/Class%20design.png)
 
 ## Testability Explanation
@@ -165,8 +168,4 @@ VS Code Command Palette:
 
 `$CMake: Debug`
 
-# Next step ...
 
-Use CPPServiceLocator to manage dependencies from config instead of hard code new().
-
-Let Platform class depend on interfaces.
