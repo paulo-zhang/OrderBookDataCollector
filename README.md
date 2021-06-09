@@ -44,7 +44,7 @@ Inject IDataFeedContext object to DataFeed implementation to allow call back not
 (To be implemented) Test Platform with Mock dependencies.
 
 ## Class diagram
-![Class diagram](images/Class design.png)
+![Class diagram](images/Class%20design.png)
 
 ## Testability Explanation
 
@@ -68,7 +68,7 @@ https://github.com/google/googletest
 
 ## Finally, run the project
 
-![Execution result](images/Execute results.png)
+![Execution result](images/Execute%20results.png)
 
 ## Install Storage Support
 
