@@ -1,10 +1,68 @@
 # OrderBookDataCollector
-# Object Oriented Design With C++ 17
+## A Complete Guide For Object Oriented Programming Using C++ 17 & VS Code CMake on Linux.
+Continue updating ...
 
 ## Requirement
 * Connect to Binance Websocket api(document: https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly)
 * Receive order book data with real-time connection (Websocket);
 * Save data to Redis & MongoDB asynchronously.
+
+## OOP Explanation
+
+### Coding convention
+
+Java & C# are relatively new languages compared to C++ or C, and they are more 'OOP friendly'.
+
+Here, I borrowed some good coding practice from Java/C#:
+
+* Name variables clearly, use full words instead of abbreviations.
+
+* Use Pascal naming convention for type definition names(class, struct, enum etc), method names, public variables; Use camel naming convention for private variables, parameters, local variables etc.
+
+* Use nested namespaces, and make sure the namespaces are according to folder names.
+
+* All classes, structs, enum (practically all function code) ..., must be written inside namespaces.
+
+### Interfaces in C++
+
+Unlike C#, there is no interface in C++, in order to achieve such abstraction I use pure virtual classes to declare interface like method signatures.
+
+### SOLID Principles
+Single Responsibility: 
+Keep in mind the SOLID principles. Make sure every class does only highly related things, and one method does one thing only. If a method is over 50 lines, it may be too chubby, try make it slimmer by splitting into methods. If a class is bigger than 500 lines, we may need to review to class and consider dividing it into smaller ones. Make sure it is high cohesion within one class, and low coupling between any two classes(see Inversion of Control).
+
+As we can see both MongoDB and Redis modules implement the same interface, the caller (Platform here) doesn't need to know about the concrete implementation, only call the method through interfaces. This is call 'Inversion of Control', depend on interfaces instead of concrete classes.
+
+### Dependency Injection (DI)
+
+Inject IDataFeedContext object to DataFeed implementation to allow call back notifications.
+
+(To be implemented) Inject IStorage objects & IDataFeed objects using service locator.
+
+(To be implemented) Make Platform a library, inject dependencies into Platform.
+
+(To be implemented) Test Platform with Mock dependencies.
+
+## Testability Explanation
+
+Testability is achieved by reducing the coupling among modules. 
+
+The concept Inversion of Control (IoC) from SOLID is the best tool to reduce coupling.
+
+When the dependencies are interfaces, we can easily inject mock implementations to test the modules (Example here will be Platform library ...).
+
+### TDD
+
+Writing test code before any implementation is possible once the interfaces are defined.
+
+In this project, when we finish writing the interfaces in Common, we can start writing unit test code for some modules even before it's implemented.
+
+### GoogleTest
+
+A great unit test framework to test C++ projects.
+
+https://github.com/google/googletest
+
 
 ## Install Storage Support
 
@@ -27,6 +85,8 @@ https://codewithhugo.com/install-just-redis-cli-on-ubuntu-debian-jessie/
 `$sudo docker run -d -p 27170-27172:27017-27019 --name mongodb mongo:latest`
 
 ## Compile Project
+
+VS Code: https://code.visualstudio.com/docs/cpp/CMake-linux
 
 Install OpenSSL: 
 `$sudo apt-get install libssl-dev`
@@ -87,69 +147,17 @@ Install mongocxx-driver:
 
 http://mongocxx.org/mongocxx-v3/installation/linux/#step-3-download-the-latest-version-of-the-mongocxx-driver
 
+Include CPPServiceLocator:
+
+`$git clone https://github.com/stevef51/CPPServiceLocator.git`
+
+`$mv CPPServiceLocator ~/Code/OrderBookDataCollector/ThirdParties/`
 
 VS Code Command Palette: 
 
 `$CMake: Build`
 
 `$CMake: Debug`
-
-
-## OOP Explanation
-
-### Coding convention
-
-Java & C# are relatively new languages compared to C++ or C, and they are more 'OOP friendly'.
-
-Here, I borrowed some good coding practice from Java/C#:
-
-* Name variables clearly, use full words instead of abbreviations.
-
-* Use Pascal naming convention for type definition names(class, struct, enum etc), method names, public variables; Use camel naming convention for private variables, parameters, local variables etc.
-
-* Use nested namespaces, and make sure the namespaces are according to folder names.
-
-* All classes, structs, enum (practically all function code) ..., must be written inside namespaces.
-
-### Interfaces in C++
-
-Unlike C#, there is no interface in C++, in order to achieve such abstraction I use pure virtual classes to declare interface like method signatures.
-
-### SOLID Principles
-Single Responsibility: 
-Keep in mind the SOLID principles. Make sure every class does only highly related things, and one method does one thing only. If a method is over 50 lines, it may be too chubby, try make it slimmer by splitting into methods. If a class is bigger than 500 lines, we may need to review to class and consider dividing it into smaller ones. Make sure it is high cohesion within one class, and low coupling between any two classes(see Inversion of Control).
-
-As we can see both MongoDB and Redis modules implement the same interface, the caller (Platform here) doesn't need to know about the concrete implementation, only call the method through interfaces. This is call 'Inversion of Control', depend on interfaces instead of concrete classes.
-
-### Dependency Injection (DI)
-
-Inject IDataFeedContext object to DataFeed implementation to allow call back notifications.
-
-(To be implemented) Inject IStorage objects & IDataFeed objects using service locator.
-
-(To be implemented) Make Platform a library, inject dependencies into Platform.
-
-(To be implemented) Test Platform with Mock dependencies.
-
-## Testability Explanation
-
-Testability is achieved by reducing the coupling among modules. 
-
-The concept Inversion of Control (IoC) from SOLID is the best tool to reduce coupling.
-
-When the dependencies are interfaces, we can easily inject mock implementations to test the modules (Example here will be Platform library ...).
-
-### TDD
-
-Writing test code before any implementation is possible once the interfaces are defined.
-
-In this project, when we finish writing the interfaces in Common, we can start writing unit test code for some modules even before it's implemented.
-
-### GoogleTest
-
-A great unit test framework to test C++ projects.
-
-https://github.com/google/googletest
 
 # Next step ...
 
