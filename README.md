@@ -45,7 +45,11 @@ Inject serviceLocators into PlatformService, so it only depends on interfaces in
 
 ## Class diagram
 
-As we can see the main library PlatformService, which start all functions, has no dependent to any concrete storages or datafeeds. It only depends on interfaces (pure virtual classes) IStorage and IDataFeed, actually it doesn't even know the existence of RedisStorage, MongoDBStorage and BinanceDataFeed, which makes it totally testable. We can create a mock storage and a mock datafeed to test Platform.
+As we can see the main library PlatformService, which starts all functions, has no dependent to any concrete storages or datafeeds. 
+
+It only depends on interfaces (pure virtual classes) IStorage and IDataFeed, actually it doesn't even know the existence of RedisStorage, MongoDBStorage and BinanceDataFeed, which makes it totally testable. 
+
+We can create a mock storage and a mock datafeed to test Platform.
 
 ![Class diagram](images/Class%20design.png)
 
