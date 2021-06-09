@@ -31,7 +31,7 @@ Unlike C#, there is no interface in C++, in order to achieve such abstraction I 
 Single Responsibility: 
 Keep in mind the SOLID principles. Make sure every class does only highly related things, and one method does one thing only. If a method is over 50 lines, it may be too chubby, try make it slimmer by splitting into methods. If a class is bigger than 500 lines, we may need to review to class and consider dividing it into smaller ones. Make sure it is high cohesion within one class, and low coupling between any two classes(see Inversion of Control).
 
-As we can see both MongoDB and Redis modules implement the same interface, the caller (Platform here) doesn't need to know about the concrete implementation, only call the method through interfaces. This is call 'Inversion of Control', depend on interfaces instead of concrete classes.
+As we can see both MongoDB and Redis modules implement the same interface, the caller (PlatformService here) doesn't need to know about the concrete implementation, only call the method through interfaces. This is call 'Inversion of Control', depend on interfaces instead of concrete classes.
 
 ### Dependency Injection (DI)
 
@@ -49,7 +49,7 @@ As we can see the main library PlatformService, which starts all functions, has 
 
 It only depends on interfaces (pure virtual classes) IStorage and IDataFeed, actually it doesn't even know the existence of RedisStorage, MongoDBStorage and BinanceDataFeed, which makes it totally testable. 
 
-We can create a mock storage and a mock datafeed to test Platform.
+We can create a mock storage and a mock datafeed to test PlatformService.
 
 ![Class diagram](images/Class%20design.png)
 
@@ -59,7 +59,7 @@ Testability is achieved by reducing the coupling among modules.
 
 The concept Inversion of Control (IoC) from SOLID is the best tool to reduce coupling.
 
-When the dependencies are interfaces, we can easily inject mock implementations to test the modules (Example here will be Platform library ...).
+When the dependencies are interfaces, we can easily inject mock implementations to test the modules (Example here is PlatformService library ...).
 
 ### TDD
 
