@@ -10,7 +10,9 @@ TEST(RedisStorage_SaveOrderBook_Test, BasicAssertions) {
   IStorage *p = new RedisStorage();
 
   // "tcp://127.0.0.1:6379"
-  p->Start("tcp://127.0.0.1:63790,password=");
+  Common::Configuration config;
+  config.MongoDBServer = "tcp://127.0.0.1:63790,password=";
+  p->Start(config);
   OrderBook orderBook = {.EventType = "depthUpdate", .EventTime = 1619922115877, .Symbol = "BNBBTC", .FirstId = 1833997158, .FinalId = 1833997167};
   orderBook.Asks.push_back(Quote() = {.Price = "0.01077900", .Quantity = "5.01075500"});
   orderBook.Asks.push_back(Quote() = {.Price = "0.01075600", .Quantity = "5.23000000"});

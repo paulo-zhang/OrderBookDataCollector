@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <Storages/MongoDB/MongoDBStorage.h>
+#include <Common/Configuration.h>
 
 using namespace Storages::MongoDB;
 
@@ -7,8 +8,10 @@ using namespace Storages::MongoDB;
 TEST(MongoDBStorage_SaveOrderBook_Test, BasicAssertions) {
   IStorage *p = new MongoDBStorage();
 
-  // "tcp://127.0.0.1:6379"
-  p->Start("mongodb://localhost:27170");
+  // "tcp://127.0.0.1:6379" 
+  Common::Configuration config;
+  config.MongoDBServer = "mongodb://localhost:27170";
+  p->Start(config);
   OrderBook orderBook = {.EventType = "depthUpdate", .EventTime = 1619922115877, .Symbol = "BNBBTC", .FirstId = 1833997158, .FinalId = 1833997167};
   orderBook.Asks.push_back(Quote() = {.Price = "0.01077900", .Quantity = "5.01075500"});
   orderBook.Asks.push_back(Quote() = {.Price = "0.01075600", .Quantity = "5.23000000"});

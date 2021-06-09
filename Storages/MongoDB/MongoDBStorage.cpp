@@ -37,9 +37,9 @@ namespace Storages
             }
         }
 
-        void MongoDBStorage::Start(string server){
+        void MongoDBStorage::Start(const Configuration &config){
+            this->server = config.MongoDBServer;
             cout << "MongoDBStorage::Start(" << server << ")\n";
-            this->server = server;
             TryConnectMongoDB();
         }
 

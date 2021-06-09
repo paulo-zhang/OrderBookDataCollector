@@ -1,9 +1,11 @@
+#pragma once
+
 #include <nlohmann/json.hpp>
 
 using namespace std;
 using json = nlohmann::json;
 
-namespace Start {
+namespace Common {
     class Configuration{
         public:
         string BinanceServer;

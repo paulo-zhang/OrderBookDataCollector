@@ -30,7 +30,7 @@ namespace Storages
             public:
                 RedisStorage();
                 ~RedisStorage() override;
-                void Start(string server) override;
+                void Start(const Configuration &config) override;
                 void Stop() override;
                 void SaveOrderBook(OrderBook orderBook) override;
         };

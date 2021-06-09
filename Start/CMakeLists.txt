@@ -22,7 +22,7 @@ endif()
 # OpenSSL, https://stackoverflow.com/questions/45548088/include-openssl-in-a-cmakelist-txt-file
 find_package(OpenSSL REQUIRED) 
 
-target_link_libraries(${PROJECT_NAME} BinanceDataFeed RedisStorage MongoDBStorage OpenSSL::SSL)
+target_link_libraries(${PROJECT_NAME} BinanceDataFeed RedisStorage MongoDBStorage PlatformService OpenSSL::SSL)
 
 # https://github.com/sewenew/redis-plus-plus#use-redis-plus-plus-in-your-project
 # <------------ add hiredis dependency --------------->

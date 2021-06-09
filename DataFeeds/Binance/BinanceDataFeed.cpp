@@ -13,8 +13,8 @@ namespace DataFeeds
 {
     namespace Binance
     {
-        BinanceDataFeed::BinanceDataFeed(IDataFeedContext *context) {
-            this->context = context;
+        BinanceDataFeed::BinanceDataFeed() {
+            
         }
 
         BinanceDataFeed::~BinanceDataFeed() {
@@ -103,9 +103,10 @@ namespace DataFeeds
             context->NewOrderBook(orderBook);
         }
         
-        void BinanceDataFeed::Start(string server){
+        void BinanceDataFeed::Start(string server, IDataFeedContext *context){
             cout << "BinanceDataFeed::Start(" << server << ")\n";
             this->server = server;
+            this->context = context;
             pReconnectThread = new thread(Reconnect, this);
         }
 

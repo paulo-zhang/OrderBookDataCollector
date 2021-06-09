@@ -47,7 +47,7 @@ namespace Storages
             public:
                 MongoDBStorage();
                 ~MongoDBStorage() override;
-                void Start(string server) override;
+                void Start(const Configuration &config) override;
                 void Stop() override;
                 void SaveOrderBook(OrderBook orderBook) override;
         };

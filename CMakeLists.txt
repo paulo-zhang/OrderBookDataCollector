@@ -3,6 +3,7 @@ project(OrderBookDataCollector VERSION 0.1.0)
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
+add_subdirectory(Platform)
 add_subdirectory(Start)
 add_subdirectory(DataFeeds/Binance)
 add_subdirectory(Storages/Redis)

@@ -32,8 +32,8 @@ namespace Storages
             }
         }
 
-        void RedisStorage::Start(string server){
-            this->server = server;
+        void RedisStorage::Start(const Configuration &config){
+            this->server = config.RedisServer;
             cout << "RedisStorage::Start(" << server << ")\n";
             TryConnectRedis();
         }

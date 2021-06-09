@@ -5,7 +5,7 @@
 
 using namespace Common;
 
-namespace Start{
+namespace Platform{
     namespace DataFeeds{
         class DataFeedContext: public IDataFeedContext{
             private:

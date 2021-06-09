@@ -47,9 +47,9 @@ namespace DataFeeds
             friend void on_message(client* c, websocketpp::connection_hdl hdl, message_ptr msg);
             void TryInitClient();
         public:
-            BinanceDataFeed(IDataFeedContext *context);
+            BinanceDataFeed();
             ~BinanceDataFeed() override;
-            void Start(string server) override;
+            void Start(string server, IDataFeedContext *context) override;
             void Stop() override;
         };
     }

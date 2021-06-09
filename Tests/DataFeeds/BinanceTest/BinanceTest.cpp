@@ -12,9 +12,9 @@ TEST(BinanceDataFeed_Connection_Test, BasicAssertions) {
       cout << "Receive orderBook(" << count << "): Symbol: " << orderBook.Symbol << ", EventType: " << orderBook.EventType << ", EventTime: " << orderBook.EventTime << endl;
   });
 
-  IDataFeed *p = new BinanceDataFeed(&contextMock);
+  IDataFeed *p = new BinanceDataFeed();
   // https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly
-  p->Start("wss://stream.binance.com:9443/ws/btcusdt@depth");
+  p->Start("wss://stream.binance.com:9443/ws/btcusdt@depth", &contextMock);
   std::this_thread::sleep_for (std::chrono::seconds(10));
   p->Stop();
   EXPECT_TRUE(p != NULL);
