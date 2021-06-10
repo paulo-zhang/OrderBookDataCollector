@@ -73,7 +73,7 @@ In this project, when we finish writing the interfaces in Common, we can start w
 
 Check out the below unit test diagram for testing PlatformService. It is very similar with the project class diagram, except that the Binance DataFeed has been replaced with two(can add as many as you want) fake DataFeeds, and the MongoDBStorage & RedisStorage have been taken over by two (also can add as many as you want) fake Storages.
 
-Now we can create whatever fake data with fake DataFeeds, and stream into PlatformService to test whether the Storages can finally receive the correct data. This whole process does NOT involve any connection to third party APIs for data or physical databases. 
+Now we can create whatever fake data with fake DataFeeds, and stream into PlatformService to test whether the Storages can finally receive the correct data. This whole process does NOT involve any connection to third party APIs for incoming data or physical databases for storing data. 
 
 What a blast!
 
