@@ -30,9 +30,12 @@ Unlike C#, there is no interface in C++, in order to achieve such abstraction I 
 
 ### SOLID Principles
 Single Responsibility: 
+
 Keep in mind the SOLID principles. Make sure every class does only highly related things, and one method does one thing only. If a method is over 50 lines, it may be too chubby, try make it slimmer by splitting into methods. If a class is bigger than 500 lines, we may need to review to class and consider dividing it into smaller ones. Make sure it is high cohesion within one class, and low coupling between any two classes(see Inversion of Control).
 
-As we can see both MongoDB and Redis modules implement the same interface, the caller (PlatformService here) doesn't need to know about the concrete implementation, only call the method through interfaces. This is call 'Inversion of Control', depend on interfaces instead of concrete classes.
+Dependency Inversion: 
+
+As we can see both MongoDB and Redis modules implement the same interface, the caller (PlatformService here) doesn't need to know about the concrete implementation, only call the method through interfaces. This is call 'Inversion of Control', i.e. components depend on interfaces instead of concrete classes.
 
 ### Dependency Injection (DI)
 
