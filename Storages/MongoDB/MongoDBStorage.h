@@ -46,10 +46,9 @@ namespace Storages
                 friend void ThreadSaveDataToMongoDB(MongoDBStorage *that);
             public:
                 MongoDBStorage();
-                ~MongoDBStorage() override;
                 void Start(const Configuration &config) override;
                 void Stop() override;
-                void SaveOrderBook(OrderBook orderBook) override;
+                void SaveOrderBook(const OrderBook &orderBook) override;
         };
     }
 }

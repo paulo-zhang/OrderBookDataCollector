@@ -28,11 +28,9 @@ namespace Storages
                 void SaveDataToRedis();
                 friend void ThreadSaveDataToRedis(RedisStorage *that);
             public:
-                RedisStorage();
-                ~RedisStorage() override;
                 void Start(const Configuration &config) override;
                 void Stop() override;
-                void SaveOrderBook(OrderBook orderBook) override;
+                void SaveOrderBook(const OrderBook &orderBook) override;
         };
     }
 }

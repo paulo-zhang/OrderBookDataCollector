@@ -23,7 +23,7 @@ namespace Platform{
         }
 
         for(const auto &feed: feeds){
-            feed->Start(config.BinanceServer, new Platform::DataFeeds::DataFeedContext([this](OrderBook& orderBook){
+            feed->Start(config.BinanceServer, make_shared<Platform::DataFeeds::DataFeedContext>([this](OrderBook& orderBook){
                 for(const auto &storage : storages){
                     storage->SaveOrderBook(orderBook);
                 }

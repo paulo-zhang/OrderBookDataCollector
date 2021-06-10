@@ -15,10 +15,6 @@ namespace Storages
             }
         }
 
-        MongoDBStorage::~MongoDBStorage(){
-
-        }
-
         void ThreadSaveDataToMongoDB(MongoDBStorage *that){
                 that->SaveDataToMongoDB();
         }
@@ -58,7 +54,7 @@ namespace Storages
             }
         }
 
-        void MongoDBStorage::SaveOrderBook(OrderBook orderBook){
+        void MongoDBStorage::SaveOrderBook(const OrderBook &orderBook){
             lock_guard<mutex> lk(mtxChache);
             cache.push_back(orderBook);
             cvNotifyCache.notify_all();

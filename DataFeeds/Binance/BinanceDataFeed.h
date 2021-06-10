@@ -38,7 +38,7 @@ namespace DataFeeds
             thread *pReconnectThread = NULL;
             string server;
             bool stopped = false;
-            IDataFeedContext *context;
+            shared_ptr<IDataFeedContext> context;
             bool initialized = false;
 
             void OnMessage(string msg);
@@ -47,9 +47,7 @@ namespace DataFeeds
             friend void on_message(client* c, websocketpp::connection_hdl hdl, message_ptr msg);
             void TryInitClient();
         public:
-            BinanceDataFeed();
-            ~BinanceDataFeed() override;
-            void Start(string server, IDataFeedContext *context) override;
+            void Start(const string &server, const shared_ptr<IDataFeedContext> &context) override;
             void Stop() override;
         };
     }

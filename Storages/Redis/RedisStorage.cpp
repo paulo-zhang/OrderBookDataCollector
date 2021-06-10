@@ -7,14 +7,6 @@ using namespace std;
 namespace Storages
 {
     namespace Redis{
-        RedisStorage::RedisStorage(){
-
-        }
-
-        RedisStorage::~RedisStorage(){
-
-        }
-        
         void ThreadSaveDataToRedis(RedisStorage *that){
             that->SaveDataToRedis();
         }
@@ -53,7 +45,7 @@ namespace Storages
             }
         }
 
-        void RedisStorage::SaveOrderBook(OrderBook orderBook){
+        void RedisStorage::SaveOrderBook(const OrderBook &orderBook){
             lock_guard<mutex> lk(mtxChache);
             cache[orderBook.Symbol] = orderBook;
             cvNotifyCache.notify_all();
