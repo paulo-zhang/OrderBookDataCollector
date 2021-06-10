@@ -71,7 +71,7 @@ Writing test code before any implementation is possible once the interfaces are 
 
 In this project, when we finish writing the interfaces in Common, we can start writing unit test code for some modules even before it's implemented.
 
-Check out the below unit test diagram for testing PlatformService. It is very similar with the project class diagram, except that the Binance DataFeed has been replaced with 2(can add as many as you want) fake DataFeeds, and the MongoDBStorage & RedisStorage have been taken over by 2 (also can add as many as you want) fake Storages.
+Check out the below unit test diagram for testing PlatformService. It is very similar with the project class diagram, except that the Binance DataFeed has been replaced with two(can add as many as you want) fake DataFeeds, and the MongoDBStorage & RedisStorage have been taken over by two (also can add as many as you want) fake Storages.
 
 Now we can create whatever fake data with fake DataFeeds, and stream into PlatformService to test whether the Storages can finally receive the correct data. This whole process does NOT involve any connection to third party APIs for data or physical databases. 
 
@@ -79,15 +79,19 @@ What a blast!
 
 ![Class diagram](images/unit_test_platform.png)
 
+Writing test code for Storages or DataFeeds is way more easier than PlatformServices, because they have fewer dependencies. I will let the code speaks, instead of explaining here.
+
 ### GoogleTest
 
-A great unit test framework to test C++ projects.
+A great unit test framework used in this projects, really worth digging.
 
 https://github.com/google/googletest
 
 ## Finally, run the project
 
 ![Execution result](images/Execute%20results.png)
+
+# More information to run this project
 
 ## Install Storage Support
 
