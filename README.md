@@ -45,7 +45,7 @@ Inject IStorage objects & IDataFeed objects using service locator.
 
 Inject serviceLocators into PlatformService, so it only depends on interfaces instead of concrete implementations.
 
-(To be implemented) Test PlatformService with Mock dependencies.
+Test PlatformService with Mock dependencies (2 fake DataFeeds and 2 fake Storages).
 
 ## Class diagram
 
@@ -70,6 +70,14 @@ When the dependencies are interfaces, we can easily inject mock implementations 
 Writing test code before any implementation is possible once the interfaces are defined.
 
 In this project, when we finish writing the interfaces in Common, we can start writing unit test code for some modules even before it's implemented.
+
+Check out the below unit test diagram for testing PlatformService. It is very similar with the project class diagram, except that the Binance DataFeed has been replaced with 2(can add as many as you want) fake DataFeeds, and the MongoDBStorage & RedisStorage have been taken over by 2 (also can add as many as you want) fake Storages.
+
+Now we can create whatever fake data with fake DataFeeds, and stream into PlatformService to test whether the Storages can finally receive the correct data. This whole process does NOT involve any connection to third party APIs for data or physical databases. 
+
+What a blast!
+
+![Class diagram](images/unit_test_platform.png)
 
 ### GoogleTest
 
