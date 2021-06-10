@@ -3,9 +3,10 @@
 Continue updating ...
 
 ## Requirement
-* Connect to Binance Websocket api(document: https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly)
+* Connect to Binance (or multiple other APIs) Websocket api(document: https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly)
 * Receive order book data with real-time connection (Websocket);
-* Save data to Redis & MongoDB asynchronously.
+* Save data to Redis & MongoDB (and other databases) asynchronously;
+* All modules are testable, unit test code coverage could be over 95%;
 
 ## OOP Explanation
 
