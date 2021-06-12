@@ -55,6 +55,8 @@ It only depends on interfaces (pure virtual classes) IStorage and IDataFeed, act
 
 We can create a mock storage and a mock datafeed to test PlatformService.
 
+Also Storages and DataFeeds can hide their complex code in the library, only expose the interfaces that they implement. Testing these library is easy because we don't need to pay attention to their implementation details, but only focus on the input and output of the interfaces, which the unit test code should test against.
+
 ![Class diagram](images/Class%20design.png)
 
 ## Testability Explanation
