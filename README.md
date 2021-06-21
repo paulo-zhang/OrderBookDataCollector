@@ -3,9 +3,10 @@
 Continue updating ...
 
 ## Requirement
-* Connect to Binance Websocket api(document: https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly)
+* Connect to Binance (or multiple other APIs) Websocket api(document: https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly)
 * Receive order book data with real-time connection (Websocket);
-* Save data to Redis & MongoDB asynchronously.
+* Save data to Redis & MongoDB (and other databases) asynchronously;
+* All modules are testable, unit test code coverage could be over 95%;
 
 ## OOP Explanation
 
@@ -29,9 +30,12 @@ Unlike C#, there is no interface in C++, in order to achieve such abstraction I 
 
 ### SOLID Principles
 Single Responsibility: 
+
 Keep in mind the SOLID principles. Make sure every class does only highly related things, and one method does one thing only. If a method is over 50 lines, it may be too chubby, try make it slimmer by splitting into methods. If a class is bigger than 500 lines, we may need to review to class and consider dividing it into smaller ones. Make sure it is high cohesion within one class, and low coupling between any two classes(see Inversion of Control).
 
-As we can see both MongoDB and Redis modules implement the same interface, the caller (PlatformService here) doesn't need to know about the concrete implementation, only call the method through interfaces. This is call 'Inversion of Control', depend on interfaces instead of concrete classes.
+Dependency Inversion: 
+
+As we can see both MongoDB and Redis modules implement the same interface, the caller (PlatformService here) doesn't need to know about the concrete implementation, only call the method through interfaces. This is call 'Inversion of Control', i.e. components depend on interfaces instead of concrete classes.
 
 ### Dependency Injection (DI)
 
@@ -41,7 +45,7 @@ Inject IStorage objects & IDataFeed objects using service locator.
 
 Inject serviceLocators into PlatformService, so it only depends on interfaces instead of concrete implementations.
 
-(To be implemented) Test PlatformService with Mock dependencies.
+Test PlatformService with Mock dependencies (2 fake DataFeeds and 2 fake Storages).
 
 ## Class diagram
 
@@ -50,6 +54,8 @@ As we can see the main library PlatformService, which starts all functions, has 
 It only depends on interfaces (pure virtual classes) IStorage and IDataFeed, actually it doesn't even know the existence of RedisStorage, MongoDBStorage and BinanceDataFeed, which makes it totally testable. 
 
 We can create a mock storage and a mock datafeed to test PlatformService.
+
+Also Storages and DataFeeds can hide their complex code in the library, only expose the interfaces that they implement. Testing these library is easy because we don't need to pay attention to their implementation details, but only focus on the input and output of the interfaces, which the unit test code should test against.
 
 ![Class diagram](images/Class%20design.png)
 
@@ -65,17 +71,29 @@ When the dependencies are interfaces, we can easily inject mock implementations 
 
 Writing test code before any implementation is possible once the interfaces are defined.
 
-In this project, when we finish writing the interfaces in Common, we can start writing unit test code for some modules even before it's implemented.
+In this project, when we finish writing the interfaces in Common, we can start writing unit test code for some modules even before they are being implemented.
+
+Check out the below unit test diagram for testing PlatformService. It is very similar with the project class diagram, except that the Binance DataFeed has been replaced with two(can add as many as you want) fake DataFeeds, and the MongoDBStorage & RedisStorage have been taken over by two (also can add as many as you want) fake Storages.
+
+Now we can create whatever fake data with fake DataFeeds, and stream it into PlatformService to test whether the Storages can finally receive the correct data. This whole process does NOT involve any connection to third party APIs for incoming data or physical databases for storing data. 
+
+What a blast!
+
+![Class diagram](images/unit_test_platform.png)
+
+Writing test code for Storages or DataFeeds is way more easier than PlatformServices, because they have fewer dependencies. I will let the code speaks, instead of explaining here.
 
 ### GoogleTest
 
-A great unit test framework to test C++ projects.
+A great unit test framework used in this projects, really worth digging.
 
 https://github.com/google/googletest
 
 ## Finally, run the project
 
 ![Execution result](images/Execute%20results.png)
+
+# More information to run this project
 
 ## Install Storage Support
 
