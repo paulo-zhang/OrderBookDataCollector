@@ -35,7 +35,7 @@ namespace DataFeeds
             // Create a client endpoint
             WebSocketClient c;
             client::connection_ptr connection;
-            thread *pReconnectThread = NULL;
+            unique_ptr<thread> pReconnectThread = nullptr;
             string server;
             bool stopped = false;
             shared_ptr<IDataFeedContext> context;

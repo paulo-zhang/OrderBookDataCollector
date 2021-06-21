@@ -8,6 +8,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include <memory>
 
 using namespace Common;
 using namespace std;
@@ -18,12 +19,12 @@ namespace Storages
         class RedisStorage : public IStorage{
             private:
                 string server;
-                sw::redis::Redis *pRedis;
+                unique_ptr<sw::redis::Redis> pRedis = nullptr;
                 unordered_map<string, OrderBook> cache;
                 mutex mtxChache;
                 condition_variable cvNotifyCache;
                 bool stopped = false;
-                thread *pSaveDataThread = NULL;
+                unique_ptr<thread> pSaveDataThread = nullptr;
                 void TryConnectRedis();
                 void SaveDataToRedis();
                 friend void ThreadSaveDataToRedis(RedisStorage *that);

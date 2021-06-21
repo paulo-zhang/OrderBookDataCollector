@@ -14,10 +14,10 @@ namespace Storages
         void RedisStorage::TryConnectRedis(){
             try
             {
-                if(pRedis != NULL)return;
+                if(pRedis != nullptr)return;
 
-                pRedis = new sw::redis::Redis(server);
-                pSaveDataThread = new thread(ThreadSaveDataToRedis, this);
+                pRedis = make_unique<sw::redis::Redis>(server);
+                pSaveDataThread = make_unique<thread>(ThreadSaveDataToRedis, this);
             }
             catch(const sw::redis::Error &e) {
                 cout << "RedisStorage::Start() error: " << e.what() << std::endl;
@@ -35,13 +35,10 @@ namespace Storages
             stopped = true;
             cvNotifyCache.notify_all();
 
-            if(pSaveDataThread != NULL){
+            if(pSaveDataThread != nullptr){
                 if(pSaveDataThread->joinable()){
                     pSaveDataThread->join();
                 }
-
-                delete pSaveDataThread;
-                pSaveDataThread = NULL;
             }
         }
 

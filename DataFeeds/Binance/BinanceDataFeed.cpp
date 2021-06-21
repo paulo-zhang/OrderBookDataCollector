@@ -99,7 +99,7 @@ namespace DataFeeds
             cout << "BinanceDataFeed::Start(" << server << ")\n";
             this->server = server;
             this->context = context;
-            pReconnectThread = new thread(Reconnect, this);
+            pReconnectThread = make_unique<thread>(Reconnect, this);
         }
 
         void BinanceDataFeed::Stop(){
@@ -114,9 +114,6 @@ namespace DataFeeds
                 if(pReconnectThread->joinable()){
                     pReconnectThread->join();
                 }
-
-                delete pReconnectThread;
-                pReconnectThread = NULL;
             }
         }
     }

@@ -20,12 +20,12 @@ namespace Storages
         }
 
         void MongoDBStorage::TryConnectMongoDB() {
-            if(pClient != NULL)return;
+            if(pClient != nullptr)return;
             
             try {
                 mongocxx::uri uri(server);
-                pClient = new mongocxx::client(uri);
-                pSaveDataThread = new thread(ThreadSaveDataToMongoDB, this);
+                pClient = make_unique<mongocxx::client>(uri);
+                pSaveDataThread = make_unique<thread>(ThreadSaveDataToMongoDB, this);
             }
             catch(const std::exception& e)
             {
@@ -44,13 +44,10 @@ namespace Storages
             stopped = true;
             cvNotifyCache.notify_all();
 
-            if(pSaveDataThread != NULL){
+            if(pSaveDataThread != nullptr){
                 if(pSaveDataThread->joinable()){
                     pSaveDataThread->join();
                 }
-
-                delete pSaveDataThread;
-                pSaveDataThread = NULL;
             }
         }
 
@@ -110,7 +107,7 @@ namespace Storages
                         documents.push_back(doc.extract());
                     }
 
-                    mongocxx::database db = (*pClient)["TradeDB"];
+                    mongocxx::database db = (*pClient.get())["TradeDB"];
                     mongocxx::collection coll = db["OrderBooks"];
                     coll.insert_many(documents);
                     cout << "SaveDataToMongoDB, count: " << documents.size() << "\n";

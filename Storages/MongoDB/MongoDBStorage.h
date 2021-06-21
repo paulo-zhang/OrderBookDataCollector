@@ -4,6 +4,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include <memory>
 
 #include <cstdint>
 #include <iostream>
@@ -35,12 +36,12 @@ namespace Storages
             private:
                 static bool initialized;
                 string server;
-                mongocxx::client *pClient = NULL;
+                unique_ptr<mongocxx::client> pClient = nullptr;
                 vector<OrderBook> cache;
                 mutex mtxChache;
                 condition_variable cvNotifyCache;
                 bool stopped = false;
-                thread *pSaveDataThread = NULL;
+                unique_ptr<thread> pSaveDataThread = nullptr;
                 void TryConnectMongoDB();
                 void SaveDataToMongoDB();
                 friend void ThreadSaveDataToMongoDB(MongoDBStorage *that);
