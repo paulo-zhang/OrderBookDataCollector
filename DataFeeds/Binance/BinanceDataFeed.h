@@ -26,7 +26,6 @@ namespace DataFeeds
         class WebSocketClient : public client {
             public:
                 BinanceDataFeed * feed;
-                ~WebSocketClient(){}
         };
 
         class BinanceDataFeed : public IDataFeed
