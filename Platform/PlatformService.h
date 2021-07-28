@@ -17,7 +17,7 @@ namespace Platform{
         shared_ptr<ServiceLocator> storageServiceLocator;
         
         public:
-        PlatformService(const shared_ptr<ServiceLocator> &dataFeedServieLocator, const shared_ptr<ServiceLocator> &storageServiceLocator);
+        PlatformService(shared_ptr<ServiceLocator> dataFeedServieLocator, shared_ptr<ServiceLocator> storageServiceLocator);
         void Start(const Configuration &config);
         void Stop();
     };

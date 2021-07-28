@@ -32,7 +32,7 @@ int main()
 
     // Storage service
     auto storageLocator = ServiceLocator::create();
-    dataFeedLocator->modules().add<StorageModule>();
+    storageLocator->modules().add<StorageModule>();
 
     PlatformService p(dataFeedLocator, storageLocator);
     p.Start(config);

@@ -12,7 +12,6 @@ namespace Platform{
                 std::function<void (OrderBook& orderBook)> callback;
             public:
                 DataFeedContext(std::function<void (OrderBook& orderBook)> callback){this->callback = callback;}
-                ~DataFeedContext(){}
                 void NewOrderBook(OrderBook& orderBook) override {
                     callback(orderBook);
                 }

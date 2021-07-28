@@ -7,7 +7,7 @@ using namespace std;
 using namespace Common;
 
 namespace Platform{
-    PlatformService::PlatformService(const shared_ptr<ServiceLocator> &dataFeedServieLocator, const shared_ptr<ServiceLocator> &storageServiceLocator){
+    PlatformService::PlatformService(shared_ptr<ServiceLocator> dataFeedServieLocator, shared_ptr<ServiceLocator> storageServiceLocator){
         this->dataFeedServieLocator = dataFeedServieLocator;
         this->storageServiceLocator = storageServiceLocator;
     }
@@ -23,7 +23,7 @@ namespace Platform{
         }
 
         for(const auto &feed: feeds){
-            feed->Start(config.BinanceServer, make_shared<Platform::DataFeeds::DataFeedContext>([this](OrderBook& orderBook){
+            feed->Start(config.BinanceServer, make_unique<Platform::DataFeeds::DataFeedContext>([this](OrderBook& orderBook){
                 for(const auto &storage : storages){
                     storage->SaveOrderBook(orderBook);
                 }

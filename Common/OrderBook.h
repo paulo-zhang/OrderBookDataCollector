@@ -25,7 +25,7 @@ namespace Common
         vector<Quote> Asks;
         vector<Quote> Bids;
 
-        string Serialize(){
+        string Serialize() const{
             json j;
             j["e"] = EventType;
             j["E"] = EventTime;

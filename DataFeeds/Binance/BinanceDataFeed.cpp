@@ -88,17 +88,17 @@ namespace DataFeeds
             }
         }
 
-        void BinanceDataFeed::OnMessage(string msg){
+        void BinanceDataFeed::OnMessage(const string &msg){
             // We should queue the msg in the case of high frequent data.
             OrderBook orderBook;
             orderBook.Deserialize(msg);
             context->NewOrderBook(orderBook);
         }
         
-        void BinanceDataFeed::Start(const string &server, const shared_ptr<IDataFeedContext> &context){
+        void BinanceDataFeed::Start(string server, unique_ptr<IDataFeedContext> &&context){
             cout << "BinanceDataFeed::Start(" << server << ")\n";
-            this->server = server;
-            this->context = context;
+            this->server = move(server);
+            this->context = move(context);
             pReconnectThread = make_unique<thread>(Reconnect, this);
         }
 
@@ -110,7 +110,7 @@ namespace DataFeeds
             string reason = "Intentionally close connection.";
             connection->close(v, reason);
 
-            if(pReconnectThread != NULL){
+            if(pReconnectThread != nullptr){
                 if(pReconnectThread->joinable()){
                     pReconnectThread->join();
                 }

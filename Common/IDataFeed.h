@@ -9,7 +9,7 @@ namespace Common
 {
     class IDataFeed {
         public:
-        virtual void Start(const string &server, const shared_ptr<IDataFeedContext> &context) = 0;
+        virtual void Start(string server, unique_ptr<IDataFeedContext> &&context) = 0;
         virtual void Stop() = 0;
     };
 }

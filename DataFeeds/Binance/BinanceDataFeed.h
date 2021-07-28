@@ -38,16 +38,16 @@ namespace DataFeeds
             unique_ptr<thread> pReconnectThread = nullptr;
             string server;
             bool stopped = false;
-            shared_ptr<IDataFeedContext> context;
+            unique_ptr<IDataFeedContext> context;
             bool initialized = false;
 
-            void OnMessage(string msg);
+            void OnMessage(const string &msg);
             void Reconnection();
             friend void Reconnect(BinanceDataFeed *that);
             friend void on_message(client* c, websocketpp::connection_hdl hdl, message_ptr msg);
             void TryInitClient();
         public:
-            void Start(const string &server, const shared_ptr<IDataFeedContext> &context) override;
+            void Start(string server, unique_ptr<IDataFeedContext> &&context) override;
             void Stop() override;
         };
     }
