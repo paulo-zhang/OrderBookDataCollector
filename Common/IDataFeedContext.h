@@ -10,6 +10,6 @@ namespace Common
     class IDataFeedContext {
         public:
         IDataFeedContext() {};
-        virtual void NewOrderBook(OrderBook& orderBook) = 0;
+        virtual void NewOrderBook(OrderBook&& orderBook) = 0;
     };
 }

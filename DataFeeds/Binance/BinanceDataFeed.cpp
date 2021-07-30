@@ -13,10 +13,6 @@ namespace DataFeeds
 {
     namespace Binance
     {
-        void Reconnect(BinanceDataFeed *that){
-            that->Reconnection();
-        }
-
         void on_message(client* c, websocketpp::connection_hdl hdl, message_ptr msg){
             ((WebSocketClient*)c)->feed->OnMessage(msg->get_payload());
         }
@@ -92,14 +88,14 @@ namespace DataFeeds
             // We should queue the msg in the case of high frequent data.
             OrderBook orderBook;
             orderBook.Deserialize(msg);
-            context->NewOrderBook(orderBook);
+            context->NewOrderBook(move(orderBook));
         }
         
         void BinanceDataFeed::Start(string server, unique_ptr<IDataFeedContext> &&context){
             cout << "BinanceDataFeed::Start(" << server << ")\n";
             this->server = move(server);
             this->context = move(context);
-            pReconnectThread = make_unique<thread>(Reconnect, this);
+            pReconnectThread = make_unique<thread>(&BinanceDataFeed::Reconnection, this);
         }
 
         void BinanceDataFeed::Stop(){

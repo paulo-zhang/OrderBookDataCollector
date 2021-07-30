@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "Library.h"
 #include "IDataFeedContext.h"
 
 using namespace std;
@@ -13,3 +14,5 @@ namespace Common
         virtual void Stop() = 0;
     };
 }
+
+extern EXPORT void* create();

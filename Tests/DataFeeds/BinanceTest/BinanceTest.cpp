@@ -8,7 +8,7 @@ using namespace DataFeeds::Binance;
 
 // Demonstrate some basic assertions.
 TEST(BinanceDataFeed_Connection_Test, BasicAssertions) {
-  unique_ptr<DataFeedContextMock> contextMock = make_unique<DataFeedContextMock>([](auto &orderBook, int count){
+  unique_ptr<DataFeedContextMock> contextMock = make_unique<DataFeedContextMock>([](auto &&orderBook, int count){
       cout << "Receive orderBook(" << count << "): Symbol: " << orderBook.Symbol << ", EventType: " << orderBook.EventType << ", EventTime: " << orderBook.EventTime << endl;
   });
 
