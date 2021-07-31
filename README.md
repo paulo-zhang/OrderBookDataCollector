@@ -7,6 +7,7 @@ Continue updating ...
 * Receive order book data with real-time connection (Websocket);
 * Save data to Redis & MongoDB (and other databases) asynchronously;
 * All modules are testable, unit test code coverage could be over 95%;
+* System extensibility: more data feeds and other storages can be added without the change to the whole system;
 
 ## OOP Explanation
 
