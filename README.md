@@ -231,5 +231,5 @@ VS Code Command Palette:
 
 ## Possible Improvements
 
-** Use CRTP to boost the performance for virtual/override;
-** Use extern "C" to load datafeeds & storage from a configuration file, therefore they can be treated like 'plugins', and can totally remove dependencies of them from main() project;
+* Use CRTP to boost the performance for virtual/override;
+* Use extern "C" to load datafeeds & storage from a configuration file, therefore they can be treated like 'plugins', and can totally remove dependencies of them from main() project;
