@@ -34,6 +34,10 @@ Single Responsibility:
 
 Keep in mind the SOLID principles. Make sure every class does only highly related things, and one method does one thing only. If a method is over 50 lines, it may be too chubby, try make it slimmer by splitting into methods. If a class is bigger than 500 lines, we may need to review to class and consider dividing it into smaller ones. Make sure it is high cohesion within one class, and low coupling between any two classes(see Inversion of Control).
 
+Open Close:
+
+Adding new datafeeds or storages won't require compilation of the other components, which means it's open for extension. Moreover, no modification is neccesary to the existing code, hence close modification.
+
 Dependency Inversion: 
 
 As we can see both MongoDB and Redis modules implement the same interface, the caller (PlatformService here) doesn't need to know about the concrete implementation, only call the method through interfaces. This is call 'Inversion of Control', i.e. components depend on interfaces instead of concrete classes.
@@ -225,3 +229,7 @@ VS Code Command Palette:
 `$CMake: Debug`
 
 
+## Possible Improvements
+
+** Use CRTP to boost the performance for virtual/override;
+** Use extern "C" to load datafeeds & storage from a configuration file, therefore they can be treated like 'plugins', and can totally remove dependencies of them from main() project;
