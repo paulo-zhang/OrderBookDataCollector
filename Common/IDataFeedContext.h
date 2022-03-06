@@ -9,7 +9,10 @@ namespace Common
 {
     class IDataFeedContext {
         public:
-        IDataFeedContext() {};
         virtual void NewOrderBook(OrderBook&& orderBook) = 0;
+        IDataFeedContext() = default;
+        IDataFeedContext(IDataFeedContext &&) = default;
+        IDataFeedContext& operator = (IDataFeedContext&&) = default;
+        virtual ~IDataFeedContext(){}
     };
 }
