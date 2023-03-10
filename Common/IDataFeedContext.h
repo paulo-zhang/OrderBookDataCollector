@@ -11,8 +11,10 @@ namespace Common
         public:
         virtual void NewOrderBook(OrderBook&& orderBook) = 0;
         IDataFeedContext() = default;
+        IDataFeedContext(const IDataFeedContext &) = default;
+        IDataFeedContext& operator = (const IDataFeedContext&) = default;
         IDataFeedContext(IDataFeedContext &&) = default;
         IDataFeedContext& operator = (IDataFeedContext&&) = default;
-        virtual ~IDataFeedContext(){}
+        virtual ~IDataFeedContext() = default;
     };
 }

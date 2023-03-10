@@ -13,10 +13,10 @@ namespace Common
         virtual void Start(string server, unique_ptr<IDataFeedContext> &&context) = 0;
         virtual void Stop() = 0;
         IDataFeed() = default;
-        IDataFeed(IDataFeed &&) = default;
-        IDataFeed& operator = (IDataFeed&&) = default;
-        virtual ~IDataFeed(){}
+        IDataFeed(const IDataFeed &) = delete;
+        IDataFeed& operator = (const IDataFeed&) = delete;
+        IDataFeed(IDataFeed &&) = delete;
+        IDataFeed& operator = (IDataFeed&&) = delete;
+        virtual ~IDataFeed() = default;
     };
 }
-
-extern EXPORT void* create();

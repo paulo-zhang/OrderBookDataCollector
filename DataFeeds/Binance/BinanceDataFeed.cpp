@@ -3,9 +3,6 @@
 #include "BinanceDataFeed.h"
 
 using namespace std;
-using websocketpp::lib::placeholders::_1;
-using websocketpp::lib::placeholders::_2;
-using websocketpp::lib::bind;
 
 typedef std::shared_ptr<boost::asio::ssl::context> context_ptr;
 
@@ -13,46 +10,40 @@ namespace DataFeeds
 {
     namespace Binance
     {
-        void on_message(client* c, websocketpp::connection_hdl hdl, message_ptr msg){
-            ((WebSocketClient*)c)->feed->OnMessage(msg->get_payload());
-        }
-
-        context_ptr on_tls_init()
-        {
-            // establishes a SSL connection
-            context_ptr ctx = std::make_shared<boost::asio::ssl::context>(boost::asio::ssl::context::sslv23);
-
-            try {
-                ctx->set_options(boost::asio::ssl::context::default_workarounds |
-                                boost::asio::ssl::context::no_sslv2 |
-                                boost::asio::ssl::context::no_sslv3 |
-                                boost::asio::ssl::context::single_dh_use);
-            } catch (std::exception &e) {
-                cout << "Error in context pointer: " << e.what() << endl;
-            }
-
-            return ctx;
-        }
-
         void BinanceDataFeed::TryInitClient(){
             try{
-                if(initialized)return;
+                if(initialized) return;
 
-                c.feed = this;
                 // Set logging to be pretty verbose (everything except message payloads)
                 c.set_access_channels(websocketpp::log::alevel::all);
                 c.clear_access_channels(websocketpp::log::alevel::frame_payload);
 
                 // Initialize ASIO
                 c.init_asio();
-                c.set_tls_init_handler(bind(&on_tls_init));
+                c.set_tls_init_handler([](auto connection_hdl){
+                    // establishes a SSL connection
+                    context_ptr ctx = std::make_shared<boost::asio::ssl::context>(boost::asio::ssl::context::sslv23);
+
+                    try {
+                        ctx->set_options(boost::asio::ssl::context::default_workarounds |
+                                        boost::asio::ssl::context::no_sslv2 |
+                                        boost::asio::ssl::context::no_sslv3 |
+                                        boost::asio::ssl::context::single_dh_use);
+                    } catch (std::exception &e) {
+                        cout << "Error in context pointer: " << e.what() << endl;
+                    }
+
+                    return ctx;
+                });
                 //c.set_tls_init_handler(bind(&BinanceDataFeed::on_tls_init, this, server.c_str(), ::_1));
 
                 // Register our message handler
-                c.set_message_handler(bind(&on_message, &c, ::_1,::_2));
+                c.set_message_handler([this](websocketpp::connection_hdl hdl, message_ptr msg){
+                    this->OnMessage(msg->get_payload());
+                });
                 initialized = true;
             }
-            catch (websocketpp::exception const & e) {
+            catch (const websocketpp::exception& e) {
                 cout << "BinanceDataFeed::TryInitClient() error: " << e.what() << std::endl;
             }
         }

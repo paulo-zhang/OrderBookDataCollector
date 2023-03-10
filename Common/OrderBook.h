@@ -38,7 +38,7 @@ namespace Common
                 auto quote = json::array();
                 quote.push_back(q.Price);
                 quote.push_back(q.Quantity);
-                asks.push_back(quote);
+                asks.push_back(move(quote));
             }
             j["a"] = asks;
 
@@ -47,7 +47,7 @@ namespace Common
                 auto quote = json::array();
                 quote.push_back(q.Price);
                 quote.push_back(q.Quantity);
-                bids.push_back(quote);
+                bids.push_back(move(quote));
             }
             j["b"] = bids;
 
@@ -76,7 +76,7 @@ namespace Common
                     }
                 }
 
-                Bids.push_back(q);
+                Bids.push_back(move(q));
             }
 
             for(auto & e : j["a"]){
@@ -92,7 +92,7 @@ namespace Common
                     }
                 }
 
-                Asks.push_back(q);
+                Asks.push_back(move(q));
             }
         }
     };

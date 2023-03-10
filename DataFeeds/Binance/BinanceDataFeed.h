@@ -21,18 +21,11 @@ namespace DataFeeds
 {
     namespace Binance
     {
-        class BinanceDataFeed;
-
-        class WebSocketClient : public client {
-            public:
-                BinanceDataFeed * feed;
-        };
-
         class BinanceDataFeed : public IDataFeed
         {
         private:
             // Create a client endpoint
-            WebSocketClient c;
+            client c;
             client::connection_ptr connection;
             unique_ptr<thread> pReconnectThread = nullptr;
             string server;

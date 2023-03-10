@@ -14,8 +14,10 @@ namespace Common
         virtual void Stop() = 0;
         virtual void SaveOrderBook(const OrderBook &orderBook) = 0;
         IStorage() = default;
-        IStorage(IStorage &&) = default;
-        IStorage& operator = (IStorage&&) = default;
-        virtual ~IStorage(){}
+        IStorage(const IStorage&) = delete;
+        IStorage& operator = (const IStorage&) = delete;
+        IStorage(IStorage &&) = delete;
+        IStorage& operator = (IStorage&&) = delete;
+        virtual ~IStorage() = default;
     };
 }
